@@ -1,26 +1,31 @@
+import PropTypes from 'prop-types';
+
 import classNames from 'classnames/bind';
+import Image from '../Image/Image';
 import styles from './AcountItem.module.scss';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
-function AcountItem() {
+function AcountItem({ data }) {
     return (
-        <div className={cx('wraper')}>
-            <img
-                className={cx('avatar')}
-                src="https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2020/08/blackpink-jisoo-phim-moi-snowdrop-1-696x1043.jpg?fit=700%2C20000&quality=95&ssl=1"
-                alt="ThaoBap"
-            />
+        <Link to={`/@${data.nickname}`} className={cx('wraper')}>
+            <Image className={cx('avatar')} src={data.avatar} alt={data.full_name} />
             <div className={cx('info')}>
                 <h4 className={cx('name')}>
-                    <p>Thao Bap</p>
-                    <span className={cx('icon-check')}>
-                        <i className="fas fa-check-circle"></i>
-                    </span>
+                    <p>{data.full_name}</p>
+                    {data.tick && (
+                        <span className={cx('icon-check')}>
+                            <i className="fas fa-check-circle"></i>
+                        </span>
+                    )}
                 </h4>
-                <span className={cx('use-name')}>thaobap</span>
+                <span className={cx('use-name')}>{data.nickname}</span>
             </div>
-        </div>
+        </Link>
     );
 }
+AcountItem.propTypes = {
+    data: PropTypes.object.isRequired,
+};
 
 export default AcountItem;

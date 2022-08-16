@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import styles from './Button.module.scss';
@@ -15,6 +16,7 @@ function Button({
     small,
     children,
     onClick,
+    className,
     ...passProps
 }) {
     // console.log(styles);
@@ -41,7 +43,7 @@ function Button({
         props.href = href;
         Comp = 'a';
     }
-    const classes = cx('wrapper', {
+    const classes = cx('wrapper', className, {
         primary,
         outline,
         small,
@@ -57,4 +59,18 @@ function Button({
     );
 }
 
+Button.propTypes = {
+    to: PropTypes.string,
+    href: PropTypes.string,
+    primary: PropTypes.bool,
+    rounded: PropTypes.bool,
+    disabled: PropTypes.bool,
+    text: PropTypes.bool,
+    outline: PropTypes.bool,
+    large: PropTypes.bool,
+    small: PropTypes.bool,
+    children: PropTypes.node.isRequired,
+    onClick: PropTypes.func,
+    className: PropTypes.string,
+};
 export default Button;
